@@ -1,14 +1,15 @@
 
 package com.unpri.charactermanager.view;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.BoxLayout;
-import javax.swing.BorderFactory;
-
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.util.ArrayList;
-import java.util.Locale;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import com.unpri.charactermanager.model.Character;
 
@@ -16,75 +17,84 @@ public class MainWindow extends JFrame {
 
     private JPanel mainPanel;
     private ArrayList<Character> characterList;
-    private double averageLevel;
 
-    // Constructor
-    public MainWindow(ArrayList<Character> characterList,
-                      double averageLevel) {
-
-        super("Character Manager v0.3");
+    public MainWindow(ArrayList<Character> characterList) {
+        super("Character Manager v0.4");
 
         this.characterList = characterList;
-        this.averageLevel = averageLevel;
 
         initComponents();
 
-        setSize(600, 400);
+        pack();
+        setMinimumSize(new Dimension(420, 300));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
     }
 
-    // Membuat komponen GUI
     private void initComponents() {
 
-        mainPanel = new JPanel();
+        mainPanel = new JPanel(new GridLayout(0, 1, 0, 8));
+        mainPanel.setBackground(AppTheme.BG_MAIN);
+        mainPanel.setBorder(AppTheme.PANEL_BORDER);
 
-        // Menyusun komponen secara vertikal
-        mainPanel.setLayout(
-                new BoxLayout(mainPanel, BoxLayout.Y_AXIS)
-        );
+        mainPanel.add(createTitleLabel());
 
-        mainPanel.setBorder(
-                BorderFactory.createEmptyBorder(20, 20, 20, 20)
-        );
-
-        // Judul
-        JLabel titleLabel = new JLabel(
-                "=== Daftar Karakter ("
-                + characterList.size() + ") ==="
-        );
-
-        mainPanel.add(titleLabel);
-
-        // Garis kosong
-        mainPanel.add(new JLabel(" "));
-
-        // Menampilkan karakter secara dinamis
         for (Character c : characterList) {
-
-            String info = c.getName()
-                    + " | " + c.getType()
-                    + " | Lv." + c.getLevel()
-                    + " | HP:" + c.getHitPoints()
-                    + " | ATK:" + c.getAttackPower();
-
-            JLabel characterLabel = new JLabel(info);
-
-            mainPanel.add(characterLabel);
+            mainPanel.add(createCharacterLabel(c));
         }
 
-        // Jarak sebelum statistik
-        mainPanel.add(new JLabel(" "));
+        add(mainPanel);
+    }
 
-        // Statistik rata-rata level
-        JLabel statisticLabel = new JLabel(
-                "Rata-rata Level: "
-                + String.format(Locale.US, "%.1f", averageLevel)
+    private JLabel createTitleLabel() {
+
+        JLabel lbl = new JLabel(
+                "Daftar Karakter (" + characterList.size() + ")",
+                SwingConstants.CENTER
         );
 
-        mainPanel.add(statisticLabel);
+        lbl.setFont(AppTheme.FONT_TITLE);
+        lbl.setForeground(AppTheme.TEXT_MAIN);
 
-        // Masukkan panel ke jendela
-        add(mainPanel);
+        return lbl;
+    }
+
+    private JLabel createCharacterLabel(Character c) {
+
+        String info = c.getName()
+                + " | " + c.getType()
+                + " | Lv." + c.getLevel()
+                + " | HP:" + c.getHitPoints()
+                + " | ATK:" + c.getAttackPower();
+
+        JLabel lbl = new JLabel(info);
+
+        lbl.setFont(AppTheme.FONT_BODY);
+        lbl.setForeground(AppTheme.TEXT_LIGHT);
+        lbl.setBackground(AppTheme.colorFor(c.getType()));
+        lbl.setOpaque(true);
+        lbl.setBorder(AppTheme.CARD_BORDER);
+
+        // Properti tambahan 1: tooltip
+        lbl.setToolTipText(
+                AppTheme.describe(c.getType())
+                + " | HP: " + c.getHitPoints()
+                + " | ATK: " + c.getAttackPower()
+        );
+
+        // Properti tambahan 2: cursor tangan
+        lbl.setCursor(
+                Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)
+        );
+
+        // Mini-Challenge: level 5 ke atas berwarna emas dan tebal
+        if (c.getLevel() >= AppTheme.HIGH_LEVEL_THRESHOLD) {
+            lbl.setForeground(AppTheme.GOLD);
+            lbl.setFont(
+                    AppTheme.FONT_BODY.deriveFont(java.awt.Font.BOLD)
+            );
+        }
+
+        return lbl;
     }
 }

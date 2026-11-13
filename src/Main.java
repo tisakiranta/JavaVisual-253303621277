@@ -1,19 +1,19 @@
 
+import java.util.ArrayList;
+import javax.swing.SwingUtilities;
+
 import com.unpri.charactermanager.model.Character;
 import com.unpri.charactermanager.model.CharacterType;
 import com.unpri.charactermanager.model.CharacterManager;
 import com.unpri.charactermanager.view.MainWindow;
 
-import javax.swing.SwingUtilities;
-
 public class Main {
 
     public static void main(String[] args) {
 
-        // 1. Membuat CharacterManager
         CharacterManager manager = new CharacterManager();
 
-        // 2. Menambahkan karakter lama
+        // Lima karakter sebelumnya
         manager.addCharacter(
                 new Character("Arjuna", CharacterType.WARRIOR, 5)
         );
@@ -26,7 +26,6 @@ public class Main {
                 new Character("Athena", CharacterType.ARCHER, 4)
         );
 
-        // 3. Menambahkan dua karakter baru untuk Sprint 3
         manager.addCharacter(
                 new Character("Laksmi", CharacterType.HEALER, 6)
         );
@@ -35,18 +34,17 @@ public class Main {
                 new Character("Bima", CharacterType.WARRIOR, 7)
         );
 
-        // 4. Mengambil data karakter
-        java.util.ArrayList<Character> dataKarakter =
+        // Karakter keenam
+        manager.addCharacter(
+                new Character("Morgana", CharacterType.MAGE, 1)
+        );
+
+        ArrayList<Character> dataKarakter =
                 manager.getAllCharacters();
 
-        // 5. Mengambil rata-rata level
-        double rataRata = manager.getAverageLevel();
-
-        // 6. Menjalankan GUI melalui Event Dispatch Thread
         SwingUtilities.invokeLater(() -> {
 
-            MainWindow window =
-                    new MainWindow(dataKarakter, rataRata);
+            MainWindow window = new MainWindow(dataKarakter);
 
             window.setVisible(true);
         });

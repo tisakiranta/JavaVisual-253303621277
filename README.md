@@ -116,3 +116,29 @@ Ditambahkan sebagai karakter petarung dengan level lebih tinggi.
 
 ## Dokumen Google Docs:
 https://docs.google.com/document/d/1v2Zi0yl9s2j8avFf8x0IP74jFcj4JJM9QB9TH5dbBmo/edit?usp=sharing
+
+
+
+## TP10 – Character Manager Sprint #4
+
+### Screenshot
+#### Sebelum (v0.3)
+![alt text](<tp10-sebelum v03.png>)
+
+#### Sesudah (v0.4)
+![alt text](tp10-sesudah-v04.png)
+
+### Pemisahan Tema dan Model
+Warna disimpan dalam AppTheme karena warna merupakan bagian dari tampilan aplikasi, bukan data karakter. Class Character hanya bertanggung jawab menyimpan informasi karakter seperti nama, role, level, HP, dan ATK. Dengan pemisahan ini, perubahan warna atau desain aplikasi dapat dilakukan tanpa mengubah class Character. Hal ini membuat program lebih mudah dirawat dan mengikuti konsep pemisahan tanggung jawab dalam MVC.
+
+### Properti Tambahan
+1. Tooltip: menampilkan informasi role, HP, dan ATK ketika pointer diarahkan ke kartu karakter.
+2. Cursor: mengubah pointer menjadi bentuk tangan ketika diarahkan ke kartu sehingga memberikan petunjuk visual kepada pengguna.
+
+### Mini-Challenge
+Karakter dengan level minimal 5 ditampilkan menggunakan tulisan berwarna emas dan tebal. Batas level disimpan dalam konstanta HIGH_LEVEL_THRESHOLD di AppTheme.
+
+### Dokumen Analisis TP10
+
+Link Google Docs:
+https://docs.google.com/document/d/1UBbkj-cEvfovZtb-TRMIS8zx4XC6FR_dXmFMy96oK2o/edit?usp=sharing

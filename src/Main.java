@@ -34,6 +34,18 @@ public class Main {
         manager.addCharacter(
                 new Character("Bima", CharacterType.WARRIOR, 7)
         );
+        // 5. Menambahkan tiga karakter baru untuk Sprint 5
+manager.addCharacter(
+        new Character("Morgana", CharacterType.MAGE, 8)
+);
+
+manager.addCharacter(
+        new Character("Ragnar", CharacterType.WARRIOR, 2)
+);
+
+manager.addCharacter(
+        new Character("Freya", CharacterType.ARCHER, 6)
+);
 
         // 4. Mengambil data karakter
         java.util.ArrayList<Character> dataKarakter =

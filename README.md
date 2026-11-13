@@ -89,3 +89,30 @@ list asli dalam CharacterManager.
 ## Dokumen analisis reference dan rancangan:
 
 https://docs.google.com/document/d/1d1Vn8ArelyxVKwGujmrTHSKaJhGMk7xp4i-FObSx1ro/edit?usp=sharing
+
+
+### TP8 - Character Manager Sprint #3
+
+Implementasi MainWindow
+
+Pada TP8, aplikasi Character Manager dikembangkan dari aplikasi berbasis console menjadi aplikasi GUI menggunakan Java Swing. Kelas MainWindow dibuat dengan mewarisi JFrame. Data karakter ditampilkan secara dinamis menggunakan perulangan for-each dan komponen JLabel.
+
+## Screenshot
+![alt text](TP8-sebelum.png)
+
+![alt text](TP8-sesudah.png)
+
+## Aliran Data dan MVC
+
+Main.java bertugas membuat objek CharacterManager dan menambahkan data karakter ke dalam sistem. CharacterManager berperan sebagai bagian dari Model yang mengelola data karakter dan menyediakan daftar karakter beserta rata-rata levelnya. Data tersebut kemudian dikirimkan oleh Main.java ke MainWindow sebagai View untuk ditampilkan menggunakan JLabel. Dengan demikian, Model bertanggung jawab terhadap pengelolaan data, sedangkan View bertanggung jawab terhadap tampilan aplikasi.
+
+## Karakter Baru
+
+Laksmi - HEALER, Level 6
+Ditambahkan sebagai karakter pendukung untuk menambah variasi tipe karakter.
+
+Bima - WARRIOR, Level 7
+Ditambahkan sebagai karakter petarung dengan level lebih tinggi.
+
+## Dokumen Google Docs:
+https://docs.google.com/document/d/1v2Zi0yl9s2j8avFf8x0IP74jFcj4JJM9QB9TH5dbBmo/edit?usp=sharing

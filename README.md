@@ -18,13 +18,13 @@ CharacterManager/
 │                   ├── Character.java
 │                   └── CharacterType.java
 ├── README.md
-└── screenshot-tp3.png
+└── outputTP3.png
 ```
 ## Screenshot Output Program
 
 Berikut merupakan hasil eksekusi program Character Manager melalui Visual Studio Code.
 
-![Output Character Manager](screenshot-tp3.png)
+![Output Character Manager] ![alt text](outputTP3.png)
 
 ## Output program mencakup:
 

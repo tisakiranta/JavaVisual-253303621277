@@ -57,9 +57,7 @@ manager.addCharacter(
         // 6. Menjalankan GUI melalui Event Dispatch Thread
         SwingUtilities.invokeLater(() -> {
 
-            MainWindow window =
-                    new MainWindow(dataKarakter, rataRata);
-
+            MainWindow window =new MainWindow(manager);
             window.setVisible(true);
         });
     }

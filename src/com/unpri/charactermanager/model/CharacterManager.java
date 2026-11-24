@@ -88,4 +88,13 @@ public class CharacterManager {
 
         return result;
     }
+
+    public boolean isNameTaken(String name) {
+    for (Character c : getAllCharacters()) {            // memakai method yang sudah ada
+        if (c.getName().equalsIgnoreCase(name)) {       // "arjuna" dianggap sama dengan "Arjuna"
+            return true;
+        }
+    }
+    return false;
+}
 }

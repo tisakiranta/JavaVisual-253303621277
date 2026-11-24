@@ -12,6 +12,8 @@ public class Character {
 
     // Constructor pertama
     public Character(String name, CharacterType type, int level) {
+        validateCharacter(name, type, level);
+
         this.name = name;
         this.type = type;
         setLevel(level);
@@ -20,12 +22,45 @@ public class Character {
     // Constructor kedua
     public Character(int id, String name, CharacterType type,
                      int level, int hitPoints, int attackPower) {
+
+        validateCharacter(name, type, level);
+
         this.id = id;
         this.name = name;
         this.type = type;
         this.level = level;
         this.hitPoints = hitPoints;
         this.attackPower = attackPower;
+    }
+
+    // Validasi Model
+    private void validateCharacter(String name, CharacterType type, int level) {
+
+        if (name == null || name.isBlank()) {
+            throw new IllegalArgumentException("Nama tidak boleh kosong");
+        }
+
+        if (!name.equals(name.trim())) {
+            throw new IllegalArgumentException(
+                    "Nama tidak boleh memiliki spasi di awal atau akhir");
+        }
+
+        if (name.contains("  ")) {
+            throw new IllegalArgumentException(
+                    "Nama tidak boleh memiliki spasi berulang");
+        }
+
+        if (type == null) {
+            throw new IllegalArgumentException("Role wajib dipilih");
+        }
+
+        if (level < 1 || level > 99) {
+            throw new IllegalArgumentException("Level harus 1-99");
+        }
+
+        if (type == CharacterType.MAGE && level > 60) {
+            throw new IllegalArgumentException("MAGE maksimal level 60");
+        }
     }
 
     // Menghitung HP
@@ -71,9 +106,12 @@ public class Character {
     // Setter Level
     public void setLevel(int level) {
 
-        if (level < 1) {
-            throw new IllegalArgumentException(
-                    "Level minimal adalah 1");
+        if (level < 1 || level > 99) {
+            throw new IllegalArgumentException("Level harus 1-99");
+        }
+
+        if (type == CharacterType.MAGE && level > 60) {
+            throw new IllegalArgumentException("MAGE maksimal level 60");
         }
 
         this.level = level;

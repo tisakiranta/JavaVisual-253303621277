@@ -266,4 +266,88 @@ Pemisahan ini membuat kode lebih mudah dipelihara. Contohnya, jika daftar karakt
 Link Google Docs Analisis TP12:https://docs.google.com/document/d/1UBbkj-cEvfovZtb-TRMIS8zx4XC6FR_dXmFMy96oK2o/edit?usp=sharing
 
 
+# TP14 — Character Manager Sprint #6
 
+### Deskripsi
+
+Pada TP14, aplikasi Character Manager dikembangkan dengan menambahkan fitur input karakter melalui Java Swing. Pengembangan ini berfokus pada pembuatan form, validasi data pada View dan Model, serta penanganan pesan kesalahan agar data yang dimasukkan sesuai dengan aturan aplikasi.
+
+### Implementasi Form Input
+
+Form input dibuat menggunakan kelas `CharacterFormPanel.java` yang berada di package `view`.
+
+Komponen yang digunakan:
+- `JTextField` untuk memasukkan nama karakter.
+- `JComboBox<CharacterType>` untuk memilih tipe karakter.
+- `JSpinner` untuk memasukkan level karakter dengan rentang 1 sampai 99.
+- Tombol Simpan untuk menambahkan karakter ke dalam `CharacterManager`.
+
+Setelah karakter berhasil ditambahkan, daftar karakter diperbarui agar karakter baru langsung terlihat pada aplikasi.
+
+### Implementasi Validasi
+
+Validasi nama dilakukan melalui method `validateName()` dengan urutan pemeriksaan:
+
+1. Kelengkapan nama: nama tidak boleh kosong.
+2. Panjang nama: harus terdiri dari 3 sampai 20 karakter.
+3. Format nama: hanya boleh menggunakan huruf dan spasi.
+4. Keunikan nama: nama tidak boleh sama dengan karakter yang sudah terdaftar.
+
+Selain validasi pada View, kelas `Character.java` juga melakukan validasi pada Model. Dengan demikian, aturan data tetap diterapkan meskipun objek Character dibuat tanpa melalui form.
+
+### Validasi Tambahan (Mini Challenge)
+
+Dua validasi tambahan yang diterapkan pada Model:
+
+1. Nama tidak boleh memiliki spasi di awal atau akhir.
+2. Nama tidak boleh memiliki spasi ganda secara berurutan.
+
+Selain itu, tipe MAGE memiliki batas level maksimum 60. Aturan ini diterapkan pada Model sehingga karakter MAGE dengan level lebih dari 60 akan ditolak.
+
+### Tabel Pengujian
+
+| No. | Input | Hasil yang Diharapkan | Hasil Aktual |
+|---|---|---|---|
+| 1 | Nama kosong | Ditolak | Ditolak, muncul pesan "Nama wajib diisi" |
+| 2 | Nama kurang dari 3 karakter | Ditolak | Ditolak |
+| 3 | Nama mengandung angka | Ditolak | Ditolak |
+| 4 | Nama duplikat (Arjuna) | Ditolak | Ditolak, muncul pesan nama sudah dipakai |
+| 5 | Bima Baru, WARRIOR, level 5 | Berhasil | Berhasil |
+| 6 | Bima Sakti, ARCHER, level 10 | Berhasil | Berhasil |
+| 7 | Gandalf, MAGE, level 61 | Ditolak | Ditolak |
+| 8 | Merlin Baru, MAGE, level 60 | Berhasil | Berhasil |
+
+### Screenshot Pengujian
+
+**1. Validasi Nama Kosong**
+
+![Validasi nama kosong](tp14-error-nama-kosong.png)
+
+Program menampilkan pesan kesalahan ketika nama karakter tidak diisi.
+
+**2. Validasi Nama Duplikat**
+
+![Validasi nama duplikat](tp14-error-nama-duplikat.png)
+
+Program menolak penambahan karakter dengan nama yang sudah digunakan.
+
+**3. Berhasil Menambahkan Karakter**
+
+![Berhasil menambahkan karakter](tp14-sukses-tambah-karakter.png)
+
+Karakter berhasil ditambahkan dan langsung ditampilkan pada daftar karakter.
+
+### Analisis MVC
+
+Pada pengembangan TP14, bagian View bertanggung jawab menerima input dan menampilkan pesan kesalahan kepada pengguna. Sementara itu, Model bertanggung jawab memastikan data karakter memenuhi aturan yang telah ditentukan.
+
+Validasi pada kedua lapisan diperlukan karena objek Character dapat dibuat dari sumber lain, misalnya pembacaan file JSON, tanpa melewati form. Oleh karena itu, validasi Model tetap diperlukan untuk menjaga konsistensi data.
+
+### Catatan Implementasi dan Kompromi Sementara
+
+Pada Sprint #6, event tombol Simpan masih menggunakan lambda ActionListener agar implementasi lebih sederhana. Form juga memanggil `CharacterManager` secara langsung untuk menambahkan karakter. Pendekatan ini merupakan kompromi sementara agar fitur dapat berjalan sesuai kebutuhan sprint. Pada pengembangan berikutnya, tanggung jawab tersebut dapat dipindahkan ke Controller agar pemisahan MVC menjadi lebih baik.
+
+### Dokumentasi Google Docs
+
+Link Google Docs Analisis TP14:
+https://docs.google.com/document/d/1laryMaOZ2D1erM6IhQReMYirsyhEaVT6VrHf1iMZh2U/edit?usp=sharing
